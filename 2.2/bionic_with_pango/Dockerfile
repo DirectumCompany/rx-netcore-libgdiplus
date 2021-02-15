@@ -12,3 +12,4 @@ RUN ./autogen.sh --with-pango \
     && make \
     && make install \
     && ln -s /usr/local/lib/libgdiplus.so /usr/lib/libgdiplus.so
+    && rm -rf /libgdiplus
