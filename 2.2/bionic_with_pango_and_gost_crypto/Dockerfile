@@ -20,9 +20,9 @@ RUN cd /bin \
     && ln -s /opt/cprocsp/bin/amd64/wipefile \
     && ln -s /opt/cprocsp/sbin/amd64/cpconfig
 
-# Ставим расширение ГОСТ для openssl, language-pack и прибираем за собой.
+# Ставим расширение ГОСТ для openssl и прибираем за собой.
 RUN apt-get update \
-    && apt-get install -y libengine-gost-openssl1.1 language-pack-ru \
+    && apt-get install -y libengine-gost-openssl1.1 \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
@@ -32,10 +32,3 @@ RUN sed -i "1s/^/openssl_conf = openssl_def\n/" /usr/lib/ssl/openssl.cnf \
 
 # Говорим .Net работать с openssl версии 1.1, без этого не будет работать валидация сертификатов ГОСТ.
 ENV CLR_OPENSSL_VERSION_OVERRIDE=1.1
-
-# Установка локализации в контейнере
-ENV LANGUAGE ru_RU.UTF-8
-ENV LANG ru_RU.UTF-8
-ENV LC_ALL ru_RU.UTF-8
-RUN echo "ru_RU.CP866 IBM866" >> /etc/locale.gen \
-    && locale-gen
