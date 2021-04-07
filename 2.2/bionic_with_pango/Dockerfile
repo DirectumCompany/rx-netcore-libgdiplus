@@ -25,3 +25,6 @@ ENV LANG ru_RU.UTF-8
 ENV LC_ALL ru_RU.UTF-8
 RUN echo "ru_RU.CP866 IBM866" >> /etc/locale.gen \
     && locale-gen
+
+# Очищаем предопределенные адреса прослушивания ASP.NET Core, что бы не было warning-ов при старте сервисов.
+ENV ASPNETCORE_URLS=
