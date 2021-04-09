@@ -8,9 +8,7 @@ RUN git clone https://github.com/mono/libgdiplus
 WORKDIR /libgdiplus
 RUN ./autogen.sh --with-pango \
     && make \
-    && make install    
-WORKDIR /
-RUN rm -rf /libgdiplus
+    && make install
 
 FROM mcr.microsoft.com/dotnet/core/aspnet:2.2-bionic
 RUN echo ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula \
