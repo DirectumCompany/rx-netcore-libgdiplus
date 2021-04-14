@@ -15,9 +15,17 @@ RUN echo ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula \
     select true | debconf-set-selections
 RUN apt-get update \
     && apt-get install -y --no-install-recommends ttf-mscorefonts-installer gss-ntlmssp libpango1.0-dev libc6-dev \
-     libgif-dev libglib2.0-dev libcairo2-dev libtiff-dev libexif-dev language-pack-ru \
+     libgif-dev libglib2.0-dev libcairo2-dev libtiff-dev libexif-dev language-pack-ru gnupg1 \
     && apt-get clean \
-    && rm -rf /var/lib/apt/lists/*        
+    && rm -rf /var/lib/apt/lists/*
+RUN echo 'deb http://deb.debian.org/debian buster main contrib non-free' > /etc/apt/sources.list.d/backports.list
+RUN apt-key adv --recv-keys --keyserver keyserver.ubuntu.com 04EE7237B7D453EC
+RUN apt-key adv --recv-keys --keyserver keyserver.ubuntu.com 648ACFD622F3D138
+RUN apt-key adv --recv-keys --keyserver keyserver.ubuntu.com DCC9EFBF77E11517
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends libpangocairo-1.0-0 \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
 COPY --from=builder /usr/local/lib/libgdiplus* /usr/lib/
 # Установка локализации в контейнере
 ENV LANGUAGE ru_RU.UTF-8
