@@ -9,6 +9,7 @@ WORKDIR /usr/local/share
 RUN git clone https://github.com/mono/libgdiplus
 
 # HACK: patch max memory size
+# см. [https://forum.aspose.com/t/pdf-to-image-dotnetcore-2-1-error-region-cgdipcombineregionpath-assertion-failed-region-bitmap/178516/28]
 WORKDIR /usr/local/share/libgdiplus/src
 RUN sed -i 's/1024/10240/g' region-bitmap.h
 
