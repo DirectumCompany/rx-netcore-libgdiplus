@@ -1,0 +1,2 @@
+# КриптоПро CSP 5.0.11944 (Jackalope) от 28.09.2020.
+d7d4e3d09b069fc847eaec7c8327e1a2  cryptopro-linux-amd64_deb.tgz
