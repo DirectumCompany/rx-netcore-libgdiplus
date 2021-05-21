@@ -1,4 +1,4 @@
-FROM directum/netcore:3.1-libgdiplus
+FROM directum/netcore:3.1-libgdiplus-pango
 
 # Ставим криптопро и прибираем за собой.
 COPY . /tmp/src
