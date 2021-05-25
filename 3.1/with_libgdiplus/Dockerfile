@@ -24,7 +24,8 @@ RUN rm -r libgdiplus
 FROM mcr.microsoft.com/dotnet/core/aspnet:3.1
 RUN echo ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula \
     select true | debconf-set-selections
-RUN echo 'deb http://deb.debian.org/debian buster contrib non-free' >> /etc/apt/sources.list \
+# Репозиторий contrib нужен для ttf-mscorefonts-installer
+RUN echo 'deb http://deb.debian.org/debian buster contrib' >> /etc/apt/sources.list \
     && apt-get update \
     && apt-get install -y --no-install-recommends ttf-mscorefonts-installer gss-ntlmssp libc6-dev \
      libgif-dev libglib2.0-dev libcairo2-dev libtiff-dev libexif-dev locales gnupg1 \
