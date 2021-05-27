@@ -1,3 +1,6 @@
+# TODO: В репозиториях testing лежит новая версия libgdiplus 6.04, на которой не проявляется ошибка с нехваткой памяти.
+# В будущем можно перейти на эту версию и не патчить исходники (сейчас если подключить testing, размер образа увеличивается на ~100Мб).
+
 FROM mcr.microsoft.com/dotnet/core/aspnet:3.1 as builder
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
