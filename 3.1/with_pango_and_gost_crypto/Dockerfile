@@ -27,8 +27,5 @@ RUN apt-get update \
     && rm -rf /var/lib/apt/lists/*
 
 # Конфигурируем openssl на работу с расширением ГОСТ.
-RUN sed -i "1s/^/openssl_conf = openssl_def\n/" /usr/lib/ssl/openssl.cnf \
-    && echo "[openssl_def]\nengines = engine_section\n\n[engine_section]\ngost = gost_section\n\n[gost_section]\nengine_id = gost\ndefault_algorithms = ALL\nCRYPT_PARAMS = id-Gost28147-89-CryptoPro-A-ParamSet" >> /usr/lib/ssl/openssl.cnf
-
-# Говорим .Net работать с openssl версии 1.1, без этого не будет работать валидация сертификатов ГОСТ.
-ENV CLR_OPENSSL_VERSION_OVERRIDE=1.1
+RUN sed -i "/^\[default_conf\]/a engines = engine_section" /usr/lib/ssl/openssl.cnf \
+    && echo "\n[engine_section]\ngost = gost_section\n\n[gost_section]\nengine_id = gost\ndefault_algorithms = ALL\nCRYPT_PARAMS = id-Gost28147-89-CryptoPro-A-ParamSet" >> /usr/lib/ssl/openssl.cnf
